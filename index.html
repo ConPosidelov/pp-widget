@@ -7,24 +7,23 @@
 
   <body>
     <div style="max-width: 1150px;">
-      <div class="block">Header</div>
+      <div class="block start">START CONTENT</div>
 
         <script id="purplepass">
             Purplepass = {
               organizerId: '55069',
-              eventId: '229425',
-             // widgetType: 'list',
+             // eventId: '229425',
+              widgetType: 'list',
               eventBlocks: ['hero', 'overview-details', 'overview-description', 'pricing'],
               showHidden: 'true',
               //uxMode: 'embedded',
               containerStyles: {
                 maxWidth: '1150px',
                 border: '1px solid rgb(215 219 235)',
-                //height: '500px',
               },
             }
         </script>
-        <div class="block">Footer</div>
+        <div class="block end">END CONTENT</div>
     </div>
     <style>
       .block {
@@ -33,11 +32,16 @@
         padding: 30px;
         text-align: center;
         font-size: 40px;
+      }
+      .start {
         background: #f5a8a8;
+      }
+      .end {
+        background: #e7f791;
       }
     </style>
 
-    <script src="https://devpp.purplepass.com/assets/widget/widget-full.js" ></script>
+    <script src="https://devpp.purplepass.com/assets/widget/widget-full.js"></script>
   </body>
 
 </html>
