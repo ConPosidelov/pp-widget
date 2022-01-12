@@ -41,6 +41,20 @@
       }
     </style>
 
+    <script>
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+        const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
+        const isIos = /iphone|ipod|ipad/.test( userAgent );
+        const isApple = isSafari || isIos || isMacLike;
+        const endEl = document.getElementById('end-block');
+        if (isApple) {
+          endEl.innerHTML = 'It is Apple';
+        } else {
+          endEl.innerHTML = 'It is not Apple';
+        }
+  </script>
+
     <script src="https://devpp.purplepass.com/assets/widget/widget-full.js"></script>
   </body>
 
