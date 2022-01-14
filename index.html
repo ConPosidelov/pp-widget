@@ -83,9 +83,7 @@
 
         </div>
 
-        <div class="col-sm">
-
-        </div>
+        <div class="col-3"></div>
         <div class="col-sm">
             <div class="form-check form-switch">
               <input class="form-check-input" type="checkbox" role="switch" id="modalScrollSwitch" onclick="checkScroll()" checked>
@@ -99,9 +97,8 @@
         <button id="showWidget" type="button" class="btn btn-primary w-auto p-2" onclick="showWidget()">Show Widget</button>
       </div>
 
-      <div class="row d-flex justify-content-center">
-
-        <script id="purplepass">
+        <div class="row d-flex justify-content-center">
+          <script id="purplepass">
             Purplepass = {
               organizerId: '55069',
               eventId: '229425',
@@ -112,15 +109,12 @@
                 border: '1px solid rgb(215 219 235)',
               },
             }
-        </script>
-
+         </script>
         </div>
         <div class="row d-flex justify-content-center p-4 end">
           <div class="col-sm">
             <div id="end-block" class="blockend "></div>
           </div>
-
-
         </div>
     </div>
     <style>
@@ -141,7 +135,7 @@
       }
     </style>
 
-<script>
+    <script>
       const userAgent = window.navigator.userAgent.toLowerCase();
       const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
       const isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(window.navigator.platform);
@@ -312,8 +306,6 @@
         scr.setAttribute('src', 'https://devpp.purplepass.com/assets/widget/widget-full.js');
         document.body.appendChild(scr);
       }
-</script>
-
+   </script>
   </body>
-
 </html>
