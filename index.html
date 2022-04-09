@@ -84,11 +84,38 @@
         </div>
 
         <div class="col-3"></div>
-        <div class="col-sm">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="modalScrollSwitch" onclick="checkScroll()" checked>
-              <label id="modalScrollSwitch-label" class="form-check-label" for="modalScrollSwitch">Modal scroll is visible.</label>
+         <div class="col-sm">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="srcSwitch" onclick="checkSrc()" checked>
+            <label id="srcSwitch-label" class="form-check-label" for="srcSwitch">Src devpp</label>
+          </div>
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="modalScrollSwitch" onclick="checkScroll()" checked>
+            <label id="modalScrollSwitch-label" class="form-check-label" for="modalScrollSwitch">Modal scroll is visible.</label>
+          </div>
+
+          <label class="form-label mt-3">Add extra PARAMS</label>
+          <div class="row align-items-center">
+            <div class="col-sm">
+              <label for="inputParamName" class="col-form-label">Param Name:</label>
             </div>
+            <div class="col-sm">
+              <input type="text" id="inputParamName" class="form-control">
+            </div>
+          </div>
+          <div class="row align-items-center mt-1">
+            <div class="col-sm">
+              <label for="inputParamVal" class="col-form-label">Param Value:</label>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="inputParamVal" class="form-control">
+            </div>
+          </div>
+          <div class="row d-flex justify-content-start p-2">
+            <button id="addParam" type="button" class="btn btn-primary w-auto p-1" onclick="addParam()">Add</button>
+          </div>
+          <div class="row d-flex justify-content-start p-2" id="extraParamContainer"></div>
         </div>
 
       </div>
@@ -148,7 +175,8 @@
         endEl.innerHTML = 'It is not Apple';
       }
 
-
+      let purplepassSrc = 'https://devpp.purplepass.com/assets/widget/widget-full.js';
+      
       function checkUxMode() {
         const checkBox = document.getElementById('uxModeSwitch');
         const label = document.getElementById('uxModeSwitch-lable');
@@ -188,6 +216,20 @@
           }
         }
       }
+      
+      function checkSrc() {
+        const checkBox = document.getElementById('srcSwitch');
+        const label = document.getElementById('srcSwitch-label');
+        if (checkBox.checked === true){
+          label.innerHTML = 'Src devpp';
+          checkBox.setAttribute('checked', 'checked')
+          purplepassSrc = 'https://devpp.purplepass.com/assets/widget/widget-full.js';
+        } else {
+          label.innerHTML = 'Src beta';
+          checkBox.removeAttribute('checked');
+          purplepassSrc = 'https://beta.purplepass.com/assets/widget/widget-full.js';
+        }
+      }
 
       const radios = document.getElementsByName('widgetTypeRadio');
       for (let i = 0; i < radios.length; i++) {
@@ -202,6 +244,43 @@
               }
           });
       }
+      
+       let extraParam = {
+        name: '',
+        value: '',
+      }
+
+      const inputParamName = document.getElementById('inputParamName');
+      const inputParamVal = document.getElementById('inputParamVal');
+      const extraParamContainer = document.getElementById('extraParamContainer');
+      inputParamName.value = '';
+      inputParamName.addEventListener('input', inputParamNameHandler);
+
+      inputParamVal.value = '';
+      inputParamVal.addEventListener('input', inputParamValHandler);
+
+      function inputParamNameHandler(e) {
+        extraParam.name = e.target.value || '';
+        inputParamName.setAttribute('value', `${e.target.value}`);
+      }
+      function inputParamValHandler(e) {
+        extraParam.value = e.target.value || '';
+        inputParamVal.setAttribute('value', `${e.target.value}`);
+      }
+      function addParam() {
+        Purplepass = {
+          ...Purplepass,
+          [extraParam.name]: `${extraParam.value}`,
+        }
+        const newParamEl = document.createElement('div');
+        newParamEl.innerText = `${extraParam.name}: ${extraParam.value}`;
+        extraParamContainer.appendChild(newParamEl);
+
+        extraParam = { name: '', value: ''};
+        inputParamName.value = '';
+        inputParamVal.value = '';
+      }
+
 
       const inputEventIdEl = document.getElementById('inputEventId');
       inputEventIdEl.value = Purplepass.eventId;
@@ -303,7 +382,7 @@
 
         const scr = document.createElement('script');
         scr.setAttribute('id', 'ppass-script');
-        scr.setAttribute('src', 'https://devpp.purplepass.com/assets/widget/widget-full.js');
+        scr.setAttribute('src', purplepassSrc);
         document.body.appendChild(scr);
       }
    </script>
